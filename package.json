@@ -46,6 +46,7 @@
     "@trpc/react-query": "^10.37.1",
     "@trpc/server": "^10.37.1",
     "class-variance-authority": "^0.7.0",
+    "cloudinary-build-url": "^0.2.4",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
     "date-fns": "^2.30.0",
@@ -63,6 +64,7 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
+    "@cld-apis/types": "^0.1.6",
     "@types/eslint": "^8.44.2",
     "@types/node": "^18.16.0",
     "@types/react": "^18.2.20",
