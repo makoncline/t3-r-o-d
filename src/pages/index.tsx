@@ -1,7 +1,6 @@
 import { api } from "@/utils/api";
 import { MarketingLayout } from "@/layouts/marketing-layout";
 import Typography from "@/components/typography";
-import { Sidebar } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { BlurUpImage } from "@/components/blur-image";
 
