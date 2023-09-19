@@ -6,8 +6,6 @@ const BLUR_QUALITY = 1;
 const BLUR_INTENSITY = 1000;
 const FORMAT = "webp";
 
-console.log(env);
-
 const baseOptions = {
   cloud: {
     cloudName: env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,

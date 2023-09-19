@@ -8,12 +8,13 @@ const values = {
     addItemCents: 150,
   },
   minimumOrderCents: 2000,
-  email: "kaymcline@gmail.com",
+  email: "makon@hey.com",
   squareLogoKey: "/daylily-catalog/3/qfzgfclzjt1lwcxamlhe",
 };
 
 export const siteConfig = {
   name: values.name,
+  email: values.email,
   description:
     "My catalog includes over 1,000 varieties in many forms. Spiders, unusual, doubles and unique forms. Double and white daylily specialist. AHS Display Garden.",
   url: "https://rollingoaksdaylilies.com",
@@ -23,13 +24,14 @@ export const siteConfig = {
     facebook: "https://www.facebook.com/Rollingoaksdaylilies/",
   },
   content: {
+    hero: {
+      title: values.name,
+      subTitle:
+        "Shop Our Stunning Collection of Named Daylilies and Seedlings.",
+      text: "Welcome to Rolling Oaks Daylilies, where you'll find a stunning collection of over 1000 named daylilies and unique seedlings. Our hybridizing focus is double and white daylilies, including a wide variety of forms like spiders and unusual doubles. As an AHS Display Garden, we pride ourselves on delivering the highest quality plants to our customers.",
+      imageKey: "/daylily-catalog/3/qfzgfclzjt1lwcxamlhe",
+    },
     sections: [
-      {
-        title: values.name,
-        subTitle:
-          "Shop Our Stunning Collection of Named Daylilies and Seedlings.",
-        text: "Welcome to Rolling Oaks Daylilies, where you'll find a stunning collection of over 1000 named daylilies and unique seedlings. Our hybridizing focus is double and white daylilies, including a wide variety of forms like spiders and unusual doubles. As an AHS Display Garden, we pride ourselves on delivering the highest quality plants to our customers.",
-      },
       {
         title: "Ordering",
         subTitle: null,

@@ -1,33 +1,82 @@
 import React from "react";
-import Image from "next/image";
+import Image, { type ImageProps } from "next/image";
 import { toBlurImageUrl, toImageUrl } from "@/lib/cloudinary";
 import { cn } from "@/lib/utils";
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+interface BlurBackgroundImageProps {
+  imageKey: string;
+}
+
+export const BlurBackgroundImage = ({ imageKey }: BlurBackgroundImageProps) => {
+  const imageBlurUrl = toBlurImageUrl(imageKey);
+  return (
+    <div
+      className="absolute inset-0 bg-cover bg-center"
+      style={{ backgroundImage: `url(${imageBlurUrl})` }}
+    />
+  );
+};
+
+interface BaseImageProps extends Omit<ImageProps, "src"> {
   imageKey: string;
   alt: string;
+}
+
+export const BaseImage = ({ imageKey, alt, ...rest }: BaseImageProps) => {
+  const imageUrl = toImageUrl(imageKey);
+  return <Image src={imageUrl} alt={alt} {...rest} />;
+};
+
+interface ResponsiveImageProps extends React.HTMLAttributes<HTMLDivElement> {
+  imageKey: string;
+  alt: string;
+  image?: React.ReactNode;
+}
+export const ResponsiveImage = ({
+  imageKey,
+  alt,
+  className,
+  image = (
+    <BaseImage
+      imageKey={imageKey}
+      alt={alt}
+      fill={true}
+      className="h-auto w-auto object-cover"
+      unoptimized
+    />
+  ),
+  ...rest
+}: ResponsiveImageProps) => {
+  const loaded = useDelayedLoad(IS_PROD);
+
+  return (
+    <div className={cn("relative h-full w-full", className)} {...rest}>
+      <BlurBackgroundImage imageKey={imageKey} />
+      {loaded && image}
+    </div>
+  );
+};
+
+interface SizedImageProps extends ResponsiveImageProps {
   width: number;
   height?: number;
   aspectRatio?: "square" | "portrait";
 }
 
-export const BlurUpImage = ({
+export const SizedImage = ({
   imageKey,
   alt,
   width,
   height = undefined,
   aspectRatio = "portrait",
   className,
-}: Props) => {
-  const imageUrl = toImageUrl(imageKey);
-  const imageBlurUrl = toBlurImageUrl(imageKey);
-
-  const loaded = useDelayedLoad(IS_PROD);
-
+  ...rest
+}: SizedImageProps) => {
   return (
-    <div
+    <ResponsiveImage
+      imageKey={imageKey}
+      alt={alt}
       className={cn(
-        "relative",
         aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square",
         className,
       )}
@@ -35,21 +84,8 @@ export const BlurUpImage = ({
         width: `${width}px`,
         height: height ? `${height}px` : undefined,
       }}
-    >
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${imageBlurUrl})` }}
-      />
-      {loaded && (
-        <Image
-          src={imageUrl}
-          alt={alt}
-          fill={true}
-          className={cn("h-auto w-auto object-cover")}
-          unoptimized
-        />
-      )}
-    </div>
+      {...rest}
+    />
   );
 };
 

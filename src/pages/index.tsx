@@ -2,7 +2,8 @@ import { api } from "@/utils/api";
 import { MarketingLayout } from "@/layouts/marketing-layout";
 import Typography from "@/components/typography";
 import { siteConfig } from "@/config/site";
-import { BlurUpImage } from "@/components/blur-image";
+import { SizedImage, ResponsiveImage } from "@/components/blur-image";
+import { MessageForm } from "@/components/message-form";
 
 export default function Home() {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -11,24 +12,37 @@ export default function Home() {
     <>
       <MarketingLayout>
         <main className="flex min-h-screen flex-col">
-          <div className="container flex flex-col gap-12 px-4 py-16 ">
-            <div className="flex flex-col gap-4">
-              <Typography.h1>{siteConfig.name}</Typography.h1>
-              <Typography.lead>
-                Welcome to Rolling Oaks Daylilies, where you&apos;ll find a
-                stunning collection of over 1000 named daylilies and unique
-                seedlings. Our hybridizing focus is double and white daylilies,
-                including a wide variety of forms like spiders and unusual
-                doubles. As an AHS Display Garden, we pride ourselves on
-                delivering the highest quality plants to our customers.
+          <div className="relative">
+            <ResponsiveImage
+              imageKey={siteConfig.squareLogoKey}
+              alt={"hero image"}
+              className="h-96 w-full"
+            />
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/50">
+              Welcome to
+              <Typography.h1 className="text-primary-foreground">
+                {siteConfig.content.hero.title}
+              </Typography.h1>
+              <Typography.lead className="text-muted-foreground">
+                {siteConfig.content.hero.text}
               </Typography.lead>
             </div>
-            <BlurUpImage
-              imageKey={siteConfig.squareLogoKey}
-              alt={"an alt"}
-              width={300}
-            />
           </div>
+
+          <div className="container flex flex-col gap-12 px-4 py-16 ">
+            {siteConfig.content.sections.map((section, i) => (
+              <div key={i} className="flex flex-col gap-4">
+                <Typography.h1>{section.title}</Typography.h1>
+                <Typography.lead>{section.text}</Typography.lead>
+              </div>
+            ))}
+          </div>
+          <SizedImage
+            imageKey={siteConfig.squareLogoKey}
+            alt={"an alt"}
+            width={300}
+          />
+          <MessageForm />
         </main>
       </MarketingLayout>
     </>
