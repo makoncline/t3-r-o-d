@@ -1,4 +1,9 @@
 name: Unit Tests
+
+env:
+  NEXT_PUBLIC_APP_URL: http://localhost:3000
+  NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: cloudinary-cloud-name
+
 on:
   push:
     branches: [main]
