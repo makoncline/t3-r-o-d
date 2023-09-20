@@ -1,18 +1,18 @@
-import { siteConfig } from "@/config/site";
+import { templateConfig } from "@/config/template";
 import { type DefaultSeoProps } from "next-seo";
 
 const config: DefaultSeoProps = {
-  titleTemplate: `%s | ${siteConfig.name}`,
-  defaultTitle: siteConfig.name,
-  description: siteConfig.description,
+  titleTemplate: `%s | ${templateConfig.name}`,
+  defaultTitle: templateConfig.name,
+  description: templateConfig.description,
   openGraph: {
     type: "website",
     locale: "en_IE",
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
+    url: templateConfig.url,
+    title: templateConfig.name,
+    description: templateConfig.description,
     images: [],
-    siteName: siteConfig.name,
+    siteName: templateConfig.name,
   },
   twitter: {
     cardType: "summary_large_image",

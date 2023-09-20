@@ -2,11 +2,12 @@ import nodemailer from "nodemailer";
 import AWS from "aws-sdk";
 
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
-import { siteConfig } from "@/config/site";
+import { templateConfig } from "@/config/template";
 import { env } from "@/env.mjs";
 import { getErrorMessage } from "@/lib/utils";
 import { TRPCError } from "@trpc/server";
 import { sendMessageSchema } from "@/schemas/send-message-schema";
+import { siteConfig } from "@/config/site";
 
 AWS.config.update({
   accessKeyId: env.AWS_ACCESS_KEY_ID,
@@ -23,9 +24,10 @@ export const emailRouter = createTRPCRouter({
     .input(sendMessageSchema)
     .mutation(async ({ input }) => {
       const mailOptions = {
-        from: "hello@daylilycatalog.com",
-        to: siteConfig.email,
-        subject: `Message from ${input.from}`,
+        from: siteConfig.fromEmail,
+        to: templateConfig.email,
+        bcc: siteConfig.adminEmails,
+        subject: `Message from ${input.name}`,
         text: input.text,
       };
 

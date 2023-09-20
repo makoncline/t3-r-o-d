@@ -19,6 +19,7 @@ import {
 import { type AppRouter } from "@/server/api/root";
 import { type inferRouterInputs } from "@trpc/server";
 import { sendMessageSchema } from "@/schemas/send-message-schema";
+import { Textarea } from "./ui/textarea";
 
 type MessageFormInput = inferRouterInputs<AppRouter>["email"]["sendMessage"];
 type MessageFormProps = React.HTMLAttributes<HTMLDivElement>;
@@ -28,7 +29,11 @@ export function MessageForm({}: MessageFormProps) {
   const { setStatus, isLoading } = useStatus();
   const form = useZodForm({
     schema: sendMessageSchema,
-    defaultValues: {},
+    defaultValues: {
+      name: "",
+      from: "",
+      text: "",
+    },
   });
   const onSubmit = async (data: MessageFormInput) => {
     setStatus("loading");
@@ -62,9 +67,8 @@ export function MessageForm({}: MessageFormProps) {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="" {...field} />
+                <Input placeholder="Lily Bloom" {...field} />
               </FormControl>
-              <FormDescription>Enter your name</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -76,9 +80,8 @@ export function MessageForm({}: MessageFormProps) {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="name@example.com" {...field} />
+                <Input placeholder="Lily.Bloom@example.comm" {...field} />
               </FormControl>
-              <FormDescription>Enter your email address</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -90,9 +93,11 @@ export function MessageForm({}: MessageFormProps) {
             <FormItem>
               <FormLabel>Message</FormLabel>
               <FormControl>
-                <Input placeholder="Hi, do you have any flowers?" {...field} />
+                <Textarea
+                  placeholder="How do I care for daylilies?"
+                  {...field}
+                />
               </FormControl>
-              <FormDescription>Enter your message</FormDescription>
               <FormMessage />
             </FormItem>
           )}

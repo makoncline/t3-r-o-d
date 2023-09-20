@@ -1,5 +1,5 @@
 import { test } from "vitest";
-import { centsToFomattedDollars } from "../../src/lib/utils";
+import { centsToFomattedDollars } from "./utils";
 
 test("converts cents to dollars correctly", () => {
   const result = centsToFomattedDollars(100);

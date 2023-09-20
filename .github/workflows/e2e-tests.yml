@@ -1,13 +1,11 @@
-name: Component Tests
+name: E2E Tests
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  deployment_status:
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    if: github.event.deployment_status.state == 'success'
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -17,5 +15,7 @@ jobs:
         run: npm ci
       - name: Install Playwright
         run: npx playwright install --with-deps
-      - name: Run Component Tests
-        run: npm run test:ct
+      - name: Run Playwright tests
+        run: npm run test:e2e
+        env:
+          PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}

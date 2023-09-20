@@ -4,7 +4,7 @@ import type { NavItem } from "@/types";
 import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
 import { MobileNav } from "./mobile-nav";
-import { siteConfig } from "@/config/site";
+import { templateConfig } from "@/config/template";
 
 interface MainNavProps {
   items?: NavItem[];
@@ -19,7 +19,7 @@ export function MainNav({ items, children }: MainNavProps) {
       <Link href="/" className="hidden items-center space-x-2 md:flex">
         <Icons.logo />
         <span className="hidden font-bold sm:inline-block">
-          {siteConfig.name}
+          {templateConfig.name}
         </span>
       </Link>
       {items?.length ? (
