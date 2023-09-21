@@ -40,12 +40,15 @@ const typographyStyles: Record<TypographyTag, string> = {
   ul: "my-6 ml-6 list-disc [&>li]:mt-2",
 };
 
-const withAsChild = (Tag: TypographyTag) => {
+const withAsChild = (Tag: string, className: string) => {
   // eslint-disable-next-line react/display-name
   return React.forwardRef<HTMLElement, TypographyProps>(
-    ({ children: child, asChild, className, ...props }, ref) => {
+    (
+      { children: child, asChild, className: overrideClassName, ...props },
+      ref,
+    ) => {
       const newElementProps = {
-        className: cn(typographyStyles[Tag], className),
+        className: cn(className, overrideClassName),
         ref,
         ...props,
       };
@@ -59,20 +62,20 @@ const withAsChild = (Tag: TypographyTag) => {
 };
 
 const Typography = {
-  h1: withAsChild("h1"),
-  h2: withAsChild("h2"),
-  h3: withAsChild("h3"),
-  h4: withAsChild("h4"),
-  p: withAsChild("p"),
-  a: withAsChild("a"),
-  blockquote: withAsChild("blockquote"),
-  code: withAsChild("code"),
-  lead: withAsChild("p"),
-  large: withAsChild("p"),
-  small: withAsChild("p"),
-  muted: withAsChild("p"),
-  ul: withAsChild("ul"),
-  pre: withAsChild("pre"),
+  h1: withAsChild("h1", typographyStyles.h1),
+  h2: withAsChild("h2", typographyStyles.h2),
+  h3: withAsChild("h3", typographyStyles.h3),
+  h4: withAsChild("h4", typographyStyles.h4),
+  p: withAsChild("p", typographyStyles.p),
+  a: withAsChild("a", typographyStyles.a),
+  blockquote: withAsChild("blockquote", typographyStyles.blockquote),
+  code: withAsChild("code", typographyStyles.code),
+  lead: withAsChild("p", typographyStyles.lead),
+  large: withAsChild("p", typographyStyles.large),
+  small: withAsChild("p", typographyStyles.small),
+  muted: withAsChild("p", typographyStyles.muted),
+  ul: withAsChild("ul", typographyStyles.ul),
+  pre: withAsChild("pre", typographyStyles.pre),
 };
 
 Typography.h1.displayName = "Typography.h1";

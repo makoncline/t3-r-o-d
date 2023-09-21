@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
 import { MobileNav } from "./mobile-nav";
 import { templateConfig } from "@/config/template";
+import { usePathname } from "next/navigation";
 
 interface MainNavProps {
   items?: NavItem[];
@@ -13,6 +14,7 @@ interface MainNavProps {
 
 export function MainNav({ items, children }: MainNavProps) {
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
+  const pathname = usePathname();
 
   return (
     <div className="flex gap-6 md:gap-10">
@@ -32,6 +34,9 @@ export function MainNav({ items, children }: MainNavProps) {
                 "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
                 "text-foreground",
                 item.disabled && "cursor-not-allowed opacity-80",
+                pathname === item.href
+                  ? "text-foreground"
+                  : "text-foreground/60",
               )}
             >
               {item.title}

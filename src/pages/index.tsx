@@ -30,25 +30,27 @@ export default function Home() {
             </Typography.h1>
           </div>
         </section>
-        <div className="container flex flex-col gap-10 px-4 py-10 ">
-          {templateConfig.content.sections.map((section, i) => (
-            <div key={i} className="flex flex-col">
-              <Typography.h2>{section.title}</Typography.h2>
-              <Typography.lead>{section.text}</Typography.lead>
-            </div>
-          ))}
+        <div className="mx-auto max-w-2xl">
+          <div className="container flex flex-col gap-10 px-4 py-10 ">
+            {templateConfig.content.sections.map((section, i) => (
+              <div key={i} className="flex flex-col">
+                <Typography.h2>{section.title}</Typography.h2>
+                <Typography.lead>{section.text}</Typography.lead>
+              </div>
+            ))}
+          </div>
+          <Card className="mx-auto w-96">
+            <CardHeader>
+              <CardTitle>Send me a message</CardTitle>
+              <CardDescription>
+                I&apos;ll get back to you as soon as possible
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <MessageForm />
+            </CardContent>
+          </Card>
         </div>
-        <Card className="mx-auto w-96">
-          <CardHeader>
-            <CardTitle>Send me a message</CardTitle>
-            <CardDescription>
-              I&apos;ll get back to you as soon as possible
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <MessageForm />
-          </CardContent>
-        </Card>
       </main>
     </MarketingLayout>
   );
