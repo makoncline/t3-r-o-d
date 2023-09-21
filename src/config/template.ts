@@ -1,6 +1,7 @@
 import { centsToFomattedDollars } from "@/lib/utils";
 
 const values = {
+  userId: 3,
   name: "Rolling Oaks Daylilies",
   shipping: {
     baseNumItems: 3,
@@ -13,6 +14,7 @@ const values = {
 };
 
 export const templateConfig = {
+  userId: values.userId,
   name: values.name,
   email: values.email,
   description:
