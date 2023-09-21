@@ -4,6 +4,13 @@ import { Typography } from "@/components/typography";
 import { templateConfig } from "@/config/template";
 import { SizedImage, ResponsiveImage } from "@/components/blur-image";
 import { MessageForm } from "@/components/message-form";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
 
 export default function Home() {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -12,7 +19,7 @@ export default function Home() {
     <>
       <MarketingLayout>
         <main className="flex min-h-screen flex-col">
-          <div className="relative w-full">
+          <section className="relative w-full">
             <ResponsiveImage
               imageKey={templateConfig.squareLogoKey}
               alt={"hero image"}
@@ -26,21 +33,26 @@ export default function Home() {
                 {templateConfig.content.hero.title}
               </Typography.h1>
             </div>
-          </div>
-          <div className="container flex flex-col gap-12 px-4 py-16 ">
+          </section>
+          <div className="container flex flex-col gap-10 px-4 py-10 ">
             {templateConfig.content.sections.map((section, i) => (
-              <div key={i} className="flex flex-col gap-4">
+              <div key={i} className="flex flex-col">
                 <Typography.h2>{section.title}</Typography.h2>
                 <Typography.lead>{section.text}</Typography.lead>
               </div>
             ))}
           </div>
-          <SizedImage
-            imageKey={templateConfig.squareLogoKey}
-            alt={"an alt"}
-            width={300}
-          />
-          <MessageForm />
+          <Card className="mx-auto w-96">
+            <CardHeader>
+              <CardTitle>Send me a message</CardTitle>
+              <CardDescription>
+                I&apos;ll get back to you as soon as possible
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <MessageForm />
+            </CardContent>
+          </Card>
         </main>
       </MarketingLayout>
     </>

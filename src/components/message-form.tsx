@@ -10,7 +10,6 @@ import { api } from "@/utils/api";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -65,7 +64,7 @@ export function MessageForm({}: MessageFormProps) {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Your name</FormLabel>
               <FormControl>
                 <Input placeholder="Lily Bloom" {...field} />
               </FormControl>
@@ -78,7 +77,7 @@ export function MessageForm({}: MessageFormProps) {
           name="from"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Your email</FormLabel>
               <FormControl>
                 <Input placeholder="Lily.Bloom@example.comm" {...field} />
               </FormControl>
@@ -91,7 +90,7 @@ export function MessageForm({}: MessageFormProps) {
           name="text"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Message</FormLabel>
+              <FormLabel>Your message</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="How do I care for daylilies?"
@@ -104,7 +103,7 @@ export function MessageForm({}: MessageFormProps) {
         />
         <Button type="submit" disabled={isLoading}>
           {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
-          Send message
+          {isLoading ? "Sending..." : "Send"}
         </Button>
       </form>
     </Form>
