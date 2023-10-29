@@ -1,8 +1,5 @@
-import { z } from "zod";
-
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { templateConfig } from "@/config/template";
-import { id } from "date-fns/locale";
 
 const NUM_DISPLAY = 6;
 
@@ -115,16 +112,18 @@ export const dataRouter = createTRPCRouter({
           imageUrl: listing.img_url[0],
         })),
       },
-      ...lists.map((list) => ({
-        name: list.name,
-        count: list._count.lilies,
-        description: list.intro,
-        displayListings: list.lilies.map((listing) => ({
-          id: listing.id,
-          name: listing.name,
-          imageUrl: listing.img_url[0],
-        })),
-      })),
+      ...lists
+        .map((list) => ({
+          name: list.name,
+          count: list._count.lilies,
+          description: list.intro,
+          displayListings: list.lilies.map((listing) => ({
+            id: listing.id,
+            name: listing.name,
+            imageUrl: listing.img_url[0],
+          })),
+        }))
+        .sort((a, b) => b.count - a.count),
     ];
     return listsData;
   }),
